@@ -20,6 +20,11 @@ RCT_EXPORT_MODULE()
     return dispatch_get_main_queue();
 }
 
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[@"PlayerEvent"];
+}
+
 RCT_EXPORT_METHOD(play:(NSString *)url
                   playerName:(NSString *)name
                   callback:(RCTResponseSenderBlock)callback)
@@ -62,6 +67,7 @@ RCT_EXPORT_METHOD(stop)
         
         [self unregisterRemoteControlEvents];
         
+        [self sendEventWithName:@"PlayerEvent" body:@{@"PlayerName": [NSNull null]}];
         [AVAudioSession.sharedInstance setActive:NO error:nil];
     }
 }
@@ -99,6 +105,7 @@ RCT_EXPORT_METHOD(currentPlayerName:(RCTResponseSenderBlock)callback)
             MPNowPlayingInfoCenter.defaultCenter.nowPlayingInfo = nowPlayingInfo;
             
             self.callback(@[[NSNull null]]);
+            [self sendEventWithName:@"PlayerEvent" body:@{@"PlayerName": self.playerName}];
         } else if (item.status == AVPlayerStatusFailed) {
             [item removeObserver:self forKeyPath:@"status"];
             self.player = nil;
@@ -124,6 +131,7 @@ RCT_EXPORT_METHOD(currentPlayerName:(RCTResponseSenderBlock)callback)
         AVPlayerItem *item = self.player.currentItem;
         [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
         [self.player play];
+        [self sendEventWithName:@"PlayerEvent" body:@{@"PlayerName": self.playerName}];
         
         return MPRemoteCommandHandlerStatusSuccess;
     } else {
@@ -140,6 +148,9 @@ RCT_EXPORT_METHOD(currentPlayerName:(RCTResponseSenderBlock)callback)
         self.player = nil;
         
         [AVAudioSession.sharedInstance setActive:NO error:nil];
+        
+        [self sendEventWithName:@"PlayerEvent" body:@{@"PlayerName": [NSNull null]}];
+        
         return MPRemoteCommandHandlerStatusSuccess;
     } else {
         return MPRemoteCommandHandlerStatusCommandFailed;

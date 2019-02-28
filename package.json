@@ -1,7 +1,7 @@
 {
   "name": "react-native-audio-streaming",
   "title": "React Native Audio Streaming",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React native audio streaming",
   "main": "index.js",
   "scripts": {
