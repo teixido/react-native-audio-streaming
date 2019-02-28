@@ -2,24 +2,24 @@
   "name": "react-native-audio-streaming",
   "title": "React Native Audio Streaming",
   "version": "1.0.0",
-  "description": "",
+  "description": "React native audio streaming",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-audio-streaming.git",
-    "baseUrl": "https://github.com/github_account/react-native-audio-streaming"
+    "url": "git@github.com:teixido/react-native-audio-streaming.git",
+    "baseUrl": "https://git@github.com:teixido/react-native-audio-streaming.git"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "Lars Klassen",
+    "email": "lars@teixido.co"
   },
-  "license": "Apache-2.0",
+  "license": "MIT",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
