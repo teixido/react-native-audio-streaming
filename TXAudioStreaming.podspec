@@ -9,17 +9,18 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   TXAudioStreaming
                    DESC
-  s.homepage     = "https://github.com/author/TXAudioStreaming"
-  s.license      = "MIT"
+  s.homepage     = package["repository"]['url']
+  s.license      = package['license']
   # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.author       = { "author" => "author@domain.cn" }
+  s.author       = package['author']
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/author/TXAudioStreaming.git", :tag => "#{s.version}" }
+  s.source       = { :git => package["repository"]['url'], :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m}"
   s.requires_arc = true
 
   s.dependency "React"
   #s.dependency "others"
+
 end
 
